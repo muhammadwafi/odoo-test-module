@@ -1,0 +1,106 @@
+<odoo>
+	<data>
+		<!-- explicit list view definition -->
+		
+		<record model="ir.ui.view" id="openshop.list">
+			<field name="name">List</field>
+			<field name="model">openshop.products</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name"/>
+					<field name="description"/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.actions.act_window" id="openshop.action_window">
+            <field name="name">Products</field>
+            <field name="res_model">openshop.products</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create new products</p>
+            </field>
+		</record>
+
+
+		<!-- Tree View -->
+		<record id="view_products_tree" model="ir.ui.view">
+            <field name="name">openshop.products.tree</field>
+            <field name="model">openshop.products</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Products">
+                    <field name="name"/>
+                    <field name="image"/>
+                    <field name="description"/>
+                    <field name="category"/>
+                    <field name="size"/>
+                    <field name="price"/>
+                    <field name="is_active"/>
+                </tree>
+            </field>
+		</record>
+
+		<!-- Form view -->
+		<record id="view_products_form" model="ir.ui.view">
+            <field name="name">openshop.products.form</field>
+            <field name="model">openshop.products</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Products">
+                    <sheet>
+                        <field name="image" widget="image"/>
+						<field name="name" required="1" placeholder="Name"/>
+						<field name="description"/>
+						<field name="category"/>
+						<field name="size"/>
+						<field name="price"/>
+						<field name="is_active" widget="radio"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+		<!-- actions opening views on models -->
+		<!--
+		<record model="ir.actions.act_window" id="openshop.action_window">
+		<field name="name">openshop window</field>
+		<field name="res_model">openshop.openshop</field>
+		<field name="view_mode">tree,form</field>
+		</record>
+		-->
+
+		<!-- server action to the one above -->
+		
+		<!-- <record model="ir.actions.server" id="openshop.action_server">
+			<field name="name">openshop server</field>
+			<field name="model_id" ref="model_openshop_products"/>
+			<field name="state">code</field>
+			<field name="code">
+				action = {
+				"type": "ir.actions.act_window",
+				"view_mode": "tree,form",
+				"res_model": model._name,
+				}
+			</field>
+		</record> -->
+		
+
+		<!-- Top menu item -->
+		
+		<menuitem name="openshop" id="openshop.menu_root"/>
+		
+		<!-- menu categories -->
+	
+		<menuitem name="Products" id="openshop.products" parent="openshop.menu_root"
+		action="openshop.action_window"/>
+	
+		<!-- actions -->
+		<!--
+			<menuitem name="List" id="openshop.menu_1_list" parent="openshop.menu_1"
+					action="openshop.action_window"/>
+			<menuitem name="Server to list" id="openshop" parent="openshop.menu_2"
+					action="openshop.action_server"/>
+		-->
+	</data>
+</odoo>

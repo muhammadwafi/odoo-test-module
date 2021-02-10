@@ -1,0 +1,13 @@
+<odoo>
+    <data>
+
+          <!-- <record id="object1" model="openshop.products">
+            <field name="name">Item 1</field>
+            <field name="description">Desc test</field>
+            <field name="category">Long Sleeves</field>
+            <field name="size">S</field>
+            <field name="price">2.05</field>
+          </record> -->
+
+    </data>
+</odoo>
