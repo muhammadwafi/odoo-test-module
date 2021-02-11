@@ -44,7 +44,7 @@ class TestProducts(TransactionCase):
             record._truncate_text(record.name, 140)
     
     def test_products_active_by_default(self):
-        """ Should be failed """
+        """ Should be fine """
         record = self.env['openshop.products'].create({
             'name': 'Products 002',
             'price': 34.0,
