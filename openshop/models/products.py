@@ -17,7 +17,8 @@
 #         for record in self:
 #             record.value2 = float(record.value) / 100
 
-from odoo import models, fields
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 
 class Products(models.Model):
     _name = 'openshop.products'
@@ -37,12 +38,29 @@ class Products(models.Model):
         ('l', 'L'),
         ('xl', 'XL'),
     ]
-    
-    name        = fields.Char(string="Name", required=True)
-    image       = fields.Binary(string="Image", attachment=True, max_width=1920, max_height=1920)
+
+    name        = fields.Char(string="Name", required=True, size=140)
+    image       = fields.Image(string="Image", attachment=True, max_width=1920, max_height=1920)
     description = fields.Text(string="Description", required=True)
     category    = fields.Selection(PRODUCT_CATS, string="Categories", required=True)
     size        = fields.Selection(PRODUCT_SIZE, string="Size", required=True)
     price       = fields.Float(string="Price", required=True)
     is_active   = fields.Boolean(string="Active", default=True)
     
+    
+    
+    def _truncate_text(self, str, size):
+        if len(str) <= size:
+            return str
+        return str[0:size]
+    
+    @api.onchange('name')
+    def _onchange_name(self):
+        if self.name > 140:
+            raise ValidationError(_("Products name cannot be longer than 140 characters: %s" % self.name))
+    
+    @api.constrains('name')
+    def _constrain_name(self):
+        if len(self.name) > 140:
+            # return self._truncate_text(self.name, 140)
+            raise ValidationError(_('Products name cannot be longer than 140 characters'))

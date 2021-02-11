@@ -49,13 +49,25 @@
             <field name="arch" type="xml">
                 <form string="Products">
                     <sheet>
-                        <field name="image" widget="image"/>
-						<field name="name" required="1" placeholder="Name"/>
-						<field name="description"/>
-						<field name="category"/>
-						<field name="size"/>
-						<field name="price"/>
-						<field name="is_active" widget="radio"/>
+						<div class="col-md-6 mx-auto">
+							<label for="image" string="Image" class="d-block"/>
+							<field name="image" widget="image"/>
+							
+							<label for="name" string="Name" class="d-block"/>
+							<field name="name" required="1" placeholder="e.g Black T-Shirt"/>
+
+							<label for="description" string="Description" class="d-block"/>
+							<field name="description" required="1" placeholder="Description"/>
+							
+							<label for="category" string="Category" class="d-block"/>
+							<field name="category" required="1"/>
+
+							<label for="size" string="Size" class="d-block"/>
+							<field name="size" widget="radio" required="1"/>
+
+							<label for="price" string="Price" class="d-block"/>
+							<field name="price" required="1"/>
+						</div>
                     </sheet>
                 </form>
             </field>
